@@ -1,0 +1,36 @@
+import sympy as sp
+
+x = sp.Symbol('x')
+
+y = 10 - x
+
+f = x**2 + y**2
+
+print("Objective Function after subsitution:")
+print(sp.expand(f))
+
+f_prime = sp.diff(f,x)
+
+print("\nFirst Derivative:")
+print(f_prime)
+
+critical_point = sp.solve(f_prime,x)
+
+f_double = sp.diff(f_prime,x)
+
+point = critical_point[0] # Assign the critical point value to 'point'
+y_value = y.subs(x,point)
+
+print("\nOptimal Point:")
+print("x =",point)
+print("y =",y_value)
+
+if f_double.subs(x,point) > 0:
+  print("Minimum Point")
+elif f_double.subs(x,point) < 0:
+  print("Maximum Point")
+else:
+  print("Test Inconclusive")
+
+
+print("Objective Function Value =",f.subs(x,point))
